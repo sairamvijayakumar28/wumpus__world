@@ -1,6 +1,6 @@
 <h1>ExpNo 9: Solve Wumpus World Problem using Python demonstrating Inferences from Propositional Logic</h1> 
-<h3>Name:                       </h3>
-<h3>Register Number/Staff Id:                </h3>
+<h3>Name:Sairam V </h3>
+<h3>Register Number:212225230237</h3>
 <H3>Aim:</H3>
 <p>
     To solve  Wumpus World Problem using Python demonstrating Inferences from Propositional Logic
@@ -29,3 +29,48 @@ It is assumed that there will always be a safe path that the agent can take to e
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8696111a-a4a7-47cb-ba4b-43a4ef88573f)
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/4be5bf06-79fa-4fa0-9334-38a33f06060b)
 
+# program:
+
+```
+from collections import deque
+
+pit = (3, 3)
+wumpus = (2, 3)
+start = (1, 1)
+goal = (4, 4)
+
+def adj(c):
+    x, y = c
+    return [(a,b) for a,b in
+            [(x-1,y),(x+1,y),(x,y-1),(x,y+1)]
+            if 1 <= a <= 4 and 1 <= b <= 4]
+
+def percept(c):
+    a = adj(c)
+    return pit in a, wumpus in a
+
+q = deque([(start, [start])])
+visited = {start}
+
+while q:
+    c, path = q.popleft()
+    print(c, "->", percept(c))
+
+    if c == goal:
+        print("Safe Path:", path)
+        break
+
+    for n in adj(c):
+        if n not in visited and n not in [pit, wumpus]:
+            visited.add(n)
+            q.append((n, path + [n]))
+
+```
+
+# output:
+
+<img width="995" height="452" alt="image" src="https://github.com/user-attachments/assets/06f46fff-4232-415b-b57d-e9cd7e1ae87d" />
+
+
+# result:
+ The program was implemented using Python successfully and found the short and correct path to reach the goal.
